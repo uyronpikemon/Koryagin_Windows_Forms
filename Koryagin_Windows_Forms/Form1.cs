@@ -15,16 +15,10 @@ namespace Koryagin_Windows_Forms
     public partial class Form1 : Form
     {
         List<string> List_Perem = new List<string>();
-
         string Main_String = "";
-
         double[] Perem_Value;
-
-        int[] deg;
-
         int Perem(string _str)
         {
-
             Regex regex = new Regex(@"^[A-Za-z]{1}[A-Za-z0-7]*$");
             Match match = regex.Match(_str);
             if (match.Success)
@@ -81,8 +75,8 @@ namespace Koryagin_Windows_Forms
                     }
                     catch
                     {
-                        FormatException ex = new FormatException("Kak Tak?");
-                        return -200000000.125;//хз чо жто
+                        FormatException ex = new FormatException("?");
+                        return -200000000.125;
                     }
                 }
                 else
@@ -295,7 +289,6 @@ namespace Koryagin_Windows_Forms
                             }
                             else
                             {
-
                                 return -200000000.137;
                             }
                         }
@@ -474,7 +467,6 @@ namespace Koryagin_Windows_Forms
             }
             else
             {
-                //Console.WriteLine("wat");
                 label1.Text = "wat?";
                 return false;
             }
@@ -498,7 +490,6 @@ namespace Koryagin_Windows_Forms
                                     {
                                         if (PrCh(P[1]) > -200000000)
                                         {
-                                            label4.Text += P[1].ToString() + " " + PrCh(P[1]).ToString() + "\n";
                                             Perem_Value[List_Perem.IndexOf(P[0])] = PrCh(P[1]);
                                         }
                                         else
@@ -545,14 +536,6 @@ namespace Koryagin_Windows_Forms
                     Errors(_str, "", -200000000.206);
                     return false;
                 }
-            }
-            for (int i = 0; i < Opers.Count; i++)
-            {
-                label3.Text += Opers[i] + "\n";
-            }
-            for (int i = 0; i < Perem_Value.Length; i++)
-            {
-                label2.Text += List_Perem[i] + " " + Perem_Value[i].ToString() + "\n";
             }
             return true;
         }
@@ -681,8 +664,8 @@ namespace Koryagin_Windows_Forms
             _str = _str.TrimStart().TrimEnd();
             List<int> fs = new List<int>();
             List<string> fss = new List<string>();
-            int a = 0; //F\S
-            int b = 0; //F\S
+            int a = 0;
+            int b = 0; 
             int mat = 0;
             string toZveno = "";
             string toLast = "";
@@ -789,8 +772,8 @@ namespace Koryagin_Windows_Forms
                             {
                                 if (_str.IndexOf("End") == _str.Length - 3)
                                 {
-                                    _str = _str.Remove(0, _str.IndexOf("Begin") + 5); //-Begin
-                                    _str = _str.Remove(_str.Length - 3, 3); //-End
+                                    _str = _str.Remove(0, _str.IndexOf("Begin") + 5);
+                                    _str = _str.Remove(_str.Length - 3, 3);
 
                                     if (Splt(_str))
                                     {
@@ -843,7 +826,7 @@ namespace Koryagin_Windows_Forms
             switch (er_code)
             {
                 case -200000000.123:
-                    label3.Text = "Пустая строка";
+                    label1.Text = "Пустая строка";
                     if(Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -852,7 +835,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.124:
-                    label3.Text = "Использована переменаня, которое не присвоено значение " + _str_err;
+                    label1.Text = "Использована переменаня, которое не присвоено значение " + _str_err;
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -863,7 +846,7 @@ namespace Koryagin_Windows_Forms
                 case -200000000.125:
                     break;
                 case -200000000.1245:
-                    label3.Text = "Использована не обозначенная ранее переменаня " + _str_err;
+                    label1.Text = "Использована не обозначенная ранее переменаня " + _str_err;
                     if(Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -872,7 +855,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.1246:
-                    label3.Text = "Неизвестный текст " + _str_err;
+                    label1.Text = "Неизвестный текст " + _str_err;
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -881,7 +864,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.126:
-                    label3.Text = "Неправильно написана функция " + _str_err;
+                    label1.Text = "Неправильно написана функция " + _str_err;
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -890,7 +873,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case 200000000.127:
-                    label3.Text = "? " + _str_err;
+                    label1.Text = "? " + _str_err;
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -899,7 +882,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.137:
-                    label3.Text = "Деление нa 0";
+                    label1.Text = "Деление нa 0";
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -908,7 +891,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.138:
-                    label3.Text = "Два знака подряд";
+                    label1.Text = "Два знака подряд";
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -917,7 +900,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.202:
-                    label3.Text = "Не переменная " + _str_err;
+                    label1.Text = "Не переменная " + _str_err;
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -926,7 +909,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.203:
-                    label3.Text = "Пропущена правая часть";
+                    label1.Text = "Пропущена правая часть";
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -935,7 +918,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.204:
-                    label3.Text = "Пропущена переменная";
+                    label1.Text = "Пропущена переменная";
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -944,7 +927,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.205:
-                    label3.Text = "Пропущена переменная и правая часть";
+                    label1.Text = "Пропущена переменная и правая часть";
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -953,7 +936,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.206:
-                    label3.Text = "Пропущена \"Метка\"";
+                    label1.Text = "Пропущена \"Метка\"";
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -962,7 +945,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.207:
-                    label3.Text = "Встечено два равно одном операторе " + _str_err;
+                    label1.Text = "Встечено два равно одном операторе " + _str_err;
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -971,7 +954,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.208:
-                    label3.Text = "Переменная в \"Последнем\" " + _str_err + " уже была объявлена";
+                    label1.Text = "Переменная в \"Последнем\" " + _str_err + " уже была объявлена";
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -980,7 +963,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.209:
-                    label3.Text = "Не переменная в \"Последнем\": " + _str_err;
+                    label1.Text = "Не переменная в \"Последнем\": " + _str_err;
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -989,7 +972,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.210:
-                    label3.Text = "Пропущена переменная в \"Последнем\" " + _str_err;
+                    label1.Text = "Пропущена переменная в \"Последнем\" " + _str_err;
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -998,7 +981,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.211:
-                    label3.Text = "Нецелое число после First " + _str_err;
+                    label1.Text = "Нецелое число после First " + _str_err;
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -1007,7 +990,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.212:
-                    label3.Text = "Пустая строка после First";
+                    label1.Text = "Пустая строка после First";
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -1016,7 +999,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.213:
-                    label3.Text = "Переменная перед Second " + _str_err + " уже была объявлена";
+                    label1.Text = "Переменная перед Second " + _str_err + " уже была объявлена";
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -1025,7 +1008,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.214:
-                    label3.Text = "Не переменная после Second: " + _str_err;
+                    label1.Text = "Не переменная после Second: " + _str_err;
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -1034,22 +1017,22 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.215:
-                    label3.Text = "Пустая строка после Second";
+                    label1.Text = "Пустая строка после Second";
                     break;
                 case -200000000.216:
-                    label3.Text = "Отсутствует \"Оператор\"";
+                    label1.Text = "Отсутствует \"Оператор\"";
                     break;
                 case -200000000.217:
-                    label3.Text = "Отсутствует \"Последнее\"";
+                    label1.Text = "Отсутствует \"Последнее\"";
                     break;
                 case -200000000.218:
-                    label3.Text = "Между Begin и Firts или Second есть что-то, кроме пробелов";
+                    label1.Text = "Между Begin и Firts или Second есть что-то, кроме пробелов";
                     break;
                 case -200000000.219:
-                    label3.Text = "В строке нет словa Firts и Second";
+                    label1.Text = "В строке нет словa Firts и Second";
                     break;
                 case -200000000.220:
-                    label3.Text = "Слово End встречено два раза";
+                    label1.Text = "Слово End встречено два раза";
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -1058,7 +1041,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.221:
-                    label3.Text = "Слово End не на последнем месте";
+                    label1.Text = "Слово End не на последнем месте";
                     if (Main_String.LastIndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -1067,7 +1050,7 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.222:
-                    label3.Text = "Слово End встречено два раза";
+                    label1.Text = "Слово End встречено два раза";
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -1076,10 +1059,10 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.223:
-                    label3.Text = "Слово Begin встречено два раза";
+                    label1.Text = "Слово Begin встречено два раза";
                     break;
                 case -200000000.224:
-                    label3.Text = "Слово Begin не на первом месте";
+                    label1.Text = "Слово Begin не на первом месте";
                     if (Main_String.IndexOf(_str) > -1)
                     {
                         richTextBox1.SelectionStart = Main_String.IndexOf(_str);
@@ -1088,17 +1071,14 @@ namespace Koryagin_Windows_Forms
                     }
                     break;
                 case -200000000.225:
-                    label3.Text = "Не встречено ключевое слово Begin";
+                    label1.Text = "Не встречено ключевое слово Begin";
                     break;
 
                 default:
-                    MessageBox.Show("?");
                     break;
             }
         }
-
-
-
+        
         public Form1()
         {
             InitializeComponent();
@@ -1106,20 +1086,16 @@ namespace Koryagin_Windows_Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
             List_Perem.Clear();
             Perem_Value = new double[0];
             label1.Text = "";
             string str;
-            //string str;
-            //string str = "Begin First 3,25 Second a234 Second a2 a3 i g First3,7,64,1,2 Second a25 awwq erew q i3;m4;b 3:a2=3*4*sin30 4:a3=3^2 5:i=a2*2 6:g=sincos30 5:a25 = a2*6 End";
-
             str = richTextBox1.Text;
-            
             Main_String = str;
-            label1.Text = _language(str).ToString();
-
-
+            richTextBox1.SelectionStart = 0;
+            richTextBox1.SelectionLength = str.Length;
+            richTextBox1.SelectionColor = Color.Black;
+            _language(str);
         }
     }
 }
