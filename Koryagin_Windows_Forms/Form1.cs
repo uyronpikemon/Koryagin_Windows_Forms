@@ -186,6 +186,7 @@ namespace Koryagin_Windows_Forms
             if (t > 0) {Errors(_str, _str, -200000000.138);return -200000000.138;}
             else
             {
+                double a = 0;
                 List<double> res_PrCh = new List<double>();
                 List<int> tr_PrCh = new List<int>();
                 for (int i = 0; i < _str.Length; i++)
@@ -236,35 +237,25 @@ namespace Koryagin_Windows_Forms
                     }
                 }
                 a = res_PrCh[0];
-
                 for (int i = 0; i < tr_PrCh.Count; i++)
                 {
-                    if (_str[tr_PrCh[i]] == '+')
-                    {
-                        a = a + res_PrCh[i + 1];
-                    }
+                    if (_str[tr_PrCh[i]] == '+') { a = a + res_PrCh[i + 1]; }
                     else
                     {
-                        if (_str[tr_PrCh[i]] == '-')
-                        {
-                            a = a - res_PrCh[i + 1];
-                        }
+                        if (_str[tr_PrCh[i]] == '-') { a = a - res_PrCh[i + 1]; }
                     }
                 }
                 return a;
             }
         }
-
         bool Oper(string _str)
         {
             List<string> Opers = new List<string>();
             Perem_Value = new double[List_Perem.Count];
-
             for (int i = 0; i < Perem_Value.Length; i++)
             {
                 Perem_Value[i] = -21038135135;
             }
-
             Regex regex = new Regex(@"\s*[0-7]+\s*:");
             MatchCollection matches = regex.Matches(_str);
             if (matches.Count > 0)
@@ -286,7 +277,6 @@ namespace Koryagin_Windows_Forms
                 label1.Text = "wat?";
                 return false;
             }
-
             for (int i = 0; i < Opers.Count; i++)
             {
                 Opers[i] = Opers[i].Replace(" ", "");
@@ -308,10 +298,7 @@ namespace Koryagin_Windows_Forms
                                         {
                                             Perem_Value[List_Perem.IndexOf(P[0])] = PrCh(P[1]);
                                         }
-                                        else
-                                        {
-                                            return false;
-                                        }
+                                        else { return false; }
                                     }
                                     else
                                     {
@@ -355,11 +342,9 @@ namespace Koryagin_Windows_Forms
             }
             return true;
         }
-
         bool Last(string _str)
         {
             _str = _str.Replace(" ", "");
-
             string[] srt = _str.Split(new char[] { ';' }, StringSplitOptions.None);
             foreach (string s in srt)
             {
@@ -372,10 +357,7 @@ namespace Koryagin_Windows_Forms
                             Errors(_str, s, -200000000.208);
                             return false;
                         }
-                        else
-                        {
-                            List_Perem.Add(s);
-                        }
+                        else { List_Perem.Add(s); }
                     }
                     else
                     {
@@ -392,18 +374,12 @@ namespace Koryagin_Windows_Forms
             }
             return true;
         }
-
         bool Zveno(string _str)
         {
             List<string> strs_for_analize = new List<string>();
             List<int> possition_of_F_or_S = new List<int>();
-
             string[] sw = _str.Split(new string[] { "First", "Second" }, StringSplitOptions.None);
-            foreach (string s in sw)
-            {
-                strs_for_analize.Add(s.Trim());
-            }
-
+            foreach (string s in sw) { strs_for_analize.Add(s.Trim()); }
             for (int i = 0; i < _str.Length - 5; i++)
             {
                 if (_str[i] == 'F' && _str[i + 1] == 'i' && _str[i + 2] == 'r' && _str[i + 3] == 's' && _str[i + 4] == 't')
@@ -415,7 +391,6 @@ namespace Koryagin_Windows_Forms
                     possition_of_F_or_S.Add(2);
                 }
             }
-
             for (int i = 0; i < possition_of_F_or_S.Count; i++)
             {
                 if (possition_of_F_or_S[i] == 1)
@@ -453,10 +428,7 @@ namespace Koryagin_Windows_Forms
                                     Errors(strs_for_analize[i + 1], r[n], -200000000.213);
                                     return false;
                                 }
-                                else
-                                {
-                                    List_Perem.Add(r[n]);
-                                }
+                                else { List_Perem.Add(r[n]); }
                             }
                             else
                             {
@@ -474,7 +446,6 @@ namespace Koryagin_Windows_Forms
             }
             return true;
         }
-
         bool Splt(string _str)
         {
             _str = _str.TrimStart().TrimEnd();
@@ -486,7 +457,6 @@ namespace Koryagin_Windows_Forms
             string toZveno = "";
             string toLast = "";
             string toOper = "";
-
             if (_str.Contains("First") || _str.Contains("Second"))
             {
                 a = Math.Min(_str.IndexOf("First"), _str.IndexOf("Second"));
@@ -509,11 +479,7 @@ namespace Koryagin_Windows_Forms
                             {
                                 mat = match_if_Second_Is_In_Last_Zveno.Index;
                             }
-                            else
-                            {
-                                Console.WriteLine("Wat");
-                                return false;
-                            }
+                            else { return false; }
                         }
                         toZveno = _str.Remove(mat).TrimEnd();
                         if (Zveno(toZveno))
@@ -528,50 +494,21 @@ namespace Koryagin_Windows_Forms
                                 {
                                     toOper = _str.Remove(0, match_for_Last.Index).Trim();
 
-                                    if (Oper(toOper))
-                                    {
-                                        return true;
-                                    }
-                                    else
-                                    {
-                                        return false;
-                                    }
+                                    if (Oper(toOper)) { return true; }
+                                    else { return false; }
                                 }
-                                else
-                                {
-                                    return false;
-                                }
+                                else { return false; }
                             }
-                            else
-                            {
-                                Errors("", "", -200000000.216);
-                                return false;
-                            }
+                            else { Errors("", "", -200000000.216); return false; }
                         }
-                        else
-                        {
-                            return false;
-                        }
+                        else { return false; }
                     }
-                    else
-                    {
-                        Errors("", "", -200000000.217);
-                        return false;
-                    }
+                    else { Errors("", "", -200000000.217); return false; }
                 }
-                else
-                {
-                    Errors("", "", -200000000.218);
-                    return false;
-                }
+                else { Errors("", "", -200000000.218); return false; }
             }
-            else
-            {
-                Errors("", "", -200000000.219);
-                return false;
-            }
+            else { Errors("", "", -200000000.219); return false; }
         }
-
         bool _language(string _str)
         {
             _str = _str.Trim();
@@ -591,14 +528,8 @@ namespace Koryagin_Windows_Forms
                                     _str = _str.Remove(0, _str.IndexOf("Begin") + 5);
                                     _str = _str.Remove(_str.Length - 3, 3);
 
-                                    if (Splt(_str))
-                                    {
-                                        return true;
-                                    }
-                                    else
-                                    {
-                                        return false;
-                                    }
+                                    if (Splt(_str)) { return true; }
+                                    else { return false; }
                                 }
                                 else
                                 {
@@ -612,31 +543,14 @@ namespace Koryagin_Windows_Forms
                                 return false;
                             }
                         }
-                        else
-                        {
-                            Errors("", "", -200000000.222);
-                            return false;
-                        }
+                        else { Errors("", "", -200000000.222); return false; }
                     }
-                    else
-                    {
-                        Errors("", "", -200000000.223);
-                        return false;
-                    }
+                    else { Errors("", "", -200000000.223); return false; }
                 }
-                else
-                {
-                    Errors("", "", -200000000.224);
-                    return false;
-                }
+                else { Errors("", "", -200000000.224); return false; }
             }
-            else
-            {
-                Errors("", "", -200000000.225);
-                return false;
-            }
+            else { Errors("", "", -200000000.225); return false; }
         }
-        
         void Errors(string _str, string _str_err, double er_code)
         {
             switch (er_code)
@@ -894,11 +808,7 @@ namespace Koryagin_Windows_Forms
                     break;
             }
         }
-        
-        public Form1()
-        {
-            InitializeComponent();
-        }
+        public Form1() { InitializeComponent(); }
 
         private void button1_Click(object sender, EventArgs e)
         {
