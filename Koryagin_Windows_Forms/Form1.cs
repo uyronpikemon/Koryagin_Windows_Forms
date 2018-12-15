@@ -452,7 +452,6 @@ namespace Koryagin_Windows_Forms
             List<int> fs = new List<int>();
             List<string> fss = new List<string>();
             int a = 0;
-            int b = 0; 
             int mat = 0;
             string toZveno = "";
             string toLast = "";
