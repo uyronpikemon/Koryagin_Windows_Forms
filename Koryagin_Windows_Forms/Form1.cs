@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
-using System.Diagnostics;
 
 namespace Koryagin_Windows_Forms
 {
@@ -30,71 +25,44 @@ namespace Koryagin_Windows_Forms
                 return 1;
             }
         }
-
         int Uel(string _str)
         {
             Regex regex = new Regex(@"^[0-7]+$");
             Match match = regex.Match(_str);
-            if (match.Success)
-            {
-                return 0;
-            }
-            else
-            {
-                return 1;
-            }
+            if (match.Success) {return 0;}
+            else {return 1;}
         }
-
         double B4(string _str)
         {
             if (Perem(_str) == 0)
             {
                 if (List_Perem.Contains(_str))
                 {
-                    if (Perem_Value[List_Perem.IndexOf(_str)] != -21038135135)
-                    {
-                        return Perem_Value[List_Perem.IndexOf(_str)];
-                    }
-                    else
-                    {
-                        return -200000000.124;
-                    }
+                    if (Perem_Value[List_Perem.IndexOf(_str)] != -21038135135){
+                        return Perem_Value[List_Perem.IndexOf(_str)];}
+                    else {return -200000000.124;}
                 }
-                else
-                {
-                    return -200000000.1245;
-                }
+                else {return -200000000.1245;}
             }
             else
             {
                 if(Uel(_str) == 0)
                 {
                     try
-                    {
-                        return Convert.ToDouble(_str);
-                    }
-                    catch
-                    {
+                    {return Convert.ToDouble(_str);}
+                    catch {
                         FormatException ex = new FormatException("?");
-                        return -200000000.125;
-                    }
+                        return -200000000.125; }
                 }
-                else
-                {
-                    return -200000000.1246;
-                }
+                else {return -200000000.1246;}
             }
         }
-
         double B3(string _str)
         {
             List<double> res_B3 = new List<double>();
             List<int> tr_B3 = new List<int>();
             List<string> func = new List<string>();
-
-            string sr = "";
-            double a;
-
+            string sr = "";  double a;
             Regex regex = new Regex(@"^(sin|cos|abs)([0-7]+|[A-Za-z]{1}[A-Za-z0-7]*)$");
             Match match = regex.Match(_str);
             if (match.Success)
@@ -102,245 +70,127 @@ namespace Koryagin_Windows_Forms
                 for (int i = 0; i < _str.Length - 2; i++)
                 {
                     sr = sr + _str[i] + _str[i + 1] + _str[i + 2];
-                    if (sr == "sin")
-                    {
-                        func.Add("sin");
-                    }
-                    if (sr == "cos")
-                    {
-                        func.Add("cos");
-                    }
-                    if (sr == "abs")
-                    {
-                        func.Add("abs");
-                    }
+                    if (sr == "sin") {func.Add("sin");}
+                    if (sr == "cos") {func.Add("cos");}
+                    if (sr == "abs") {func.Add("abs");}
                     sr = "";
                 }
-
                 string[] strs = _str.Split(new string[] { "sin", "cos", "abs" }, StringSplitOptions.RemoveEmptyEntries);
-
-                if (B4(strs[0]) < -200000000)
-                {
-                    Errors(_str, strs[0], B4(strs[0]));
-                    return -200000000.127;
-                }
+                if (B4(strs[0]) < -200000000) {Errors(_str, strs[0], B4(strs[0])); return -200000000.127;}
                 else
                 {
                     a = B4(strs[0]);
                     for (int i = func.Count - 1; i >= 0; i--)
                     {
-                        if (func[i] == "sin")
-                        {
-                            a = Math.Sin(a * (Math.PI / 180));
-                        }
-                        if (func[i] == "cos")
-                        {
-                            a = Math.Cos(a * (Math.PI / 180));
-                        }
-                        if (func[i] == "abs")
-                        {
-                            a = Math.Abs(a);
-                        }
+                        if (func[i] == "sin") {a = Math.Sin(a * (Math.PI / 180));}
+                        if (func[i] == "cos") {a = Math.Cos(a * (Math.PI / 180));}
+                        if (func[i] == "abs") {a = Math.Abs(a);}
                     }
                     return a;
                 }
             }
-            else
-            {
-                return -200000000.126;
-            }
+            else {return -200000000.126;}
         }
-
         double B2(string _str)
         {
             double a = 0;
             List<double> res_B2 = new List<double>();
             List<int> tr_B2 = new List<int>();
-
-            for (int i = 0; i < _str.Length; i++)
-            {
-                if (_str[i] == '^')
-                {
-                    tr_B2.Add(i);
-                }
-            }
-
+            for (int i = 0; i < _str.Length; i++) {if (_str[i] == '^') {tr_B2.Add(i);}}
             string[] strs = _str.Split(new char[] { '^' });
             foreach (string s in strs)
             {
                 if (s.Contains("sin") || s.Contains("cos") || s.Contains("abs"))
                 {
-                    if (B3(s) < -200000000)
-                    {
-                        Errors(_str, s, B3(s));
-                        return -200000000.128;
-                    }
-                    else
-                    {
-                        res_B2.Add(B3(s));
-                    }
+                    if (B3(s) < -200000000) {Errors(_str, s, B3(s)); return -200000000.128;}
+                    else {res_B2.Add(B3(s));}
                 }
                 else
                 {
-                    if (B4(s) < -200000000)
-                    {
-                        Errors(_str, s, B4(s));
-                        return -200000000.129;
-                    }
-                    else
-                    {
-                        res_B2.Add(B4(s));
-                    }
+                    if (B4(s) < -200000000) {Errors(_str, s, B4(s)); return -200000000.129;}
+                    else {res_B2.Add(B4(s));}
                 }
             }
-
             if (res_B2.Count > 1)
             {
                 a = res_B2[tr_B2.Count];
-
-                for (int i = tr_B2.Count; i > 0; i--)
-                {
-                    a = Math.Pow(res_B2[i - 1], a);
-                }
+                for (int i = tr_B2.Count; i > 0; i--) {a = Math.Pow(res_B2[i - 1], a);}
                 return a;
             }
-            else
-            {
-                return res_B2[0];
-            }
+            else {return res_B2[0];}
         }
-
         double B1(string _str)
         {
             double a = 0;
-
             List<double> res_B1 = new List<double>();
             List<int> tr_B1 = new List<int>();
-
             for (int i = 0; i < _str.Length; i++)
             {
-                if (_str[i] == '*' || _str[i] == '/')
-                {
-                    tr_B1.Add(i);
-                }
+                if (_str[i] == '*' || _str[i] == '/') {tr_B1.Add(i);}
             }
-
             string[] strs = _str.Split(new char[] { '*', '/' });
             foreach (string s in strs)
             {
                 if (s.Contains('^'))
                 {
-                    if (B2(s) < -200000000)
-                    {
-                        Errors(_str, s, B2(s));
-                        return -200000000.130;
-                    }
-                    else
-                    {
-                        res_B1.Add(B2(s));
-                    }
+                    if (B2(s) < -200000000) {Errors(_str, s, B2(s));return -200000000.130;}
+                    else {res_B1.Add(B2(s));}
                 }
                 else
                 {
                     if (s.Contains("sin") || s.Contains("cos") || s.Contains("abs"))
                     {
-                        if (B3(s) < -200000000)
-                        {
-                            Errors(_str, s, B3(s));
-                            return -200000000.131;
-                        }
-                        else
-                        {
-                            res_B1.Add(B3(s));
-                        }
+                        if (B3(s) < -200000000) {Errors(_str, s, B3(s));return -200000000.131;}
+                        else {res_B1.Add(B3(s));}
                     }
                     else
                     {
-                        if (B4(s) < -200000000)
-                        {
-                            Errors(_str, s, B4(s));
-                            return -200000000.132;
-                        }
-                        else
-                        {
-                            res_B1.Add(B4(s));
-                        }
+                        if (B4(s) < -200000000) {Errors(_str, s, B4(s));return -200000000.132;}
+                        else {res_B1.Add(B4(s));}
                     }
                 }
             }
-
             if (res_B1.Count > 1)
             {
                 a = res_B1[0];
-
                 for (int i = 0; i < tr_B1.Count; i++)
                 {
-                    if (_str[tr_B1[i]] == '*')
-                    {
-                        a = a * res_B1[i + 1];
-                    }
+                    if (_str[tr_B1[i]] == '*') { a = a * res_B1[i + 1]; }
                     else
                     {
                         if (_str[tr_B1[i]] == '/')
                         {
-                            if (res_B1[i + 1] != 0)
-                            {
-                                a = a / res_B1[i + 1];
-                            }
-                            else
-                            {
-                                return -200000000.137;
-                            }
+                            if (res_B1[i + 1] != 0) { a = a / res_B1[i + 1]; }
+                            else { return -200000000.137; }
                         }
                     }
                 }
                 return a;
             }
-            else
-            {
-                return (res_B1[0]);
-            }
+            else { return (res_B1[0]);}
         }
-
         double PrCh(string _str)
         {
             List<int> Zn = new List<int>();
             int t = 0;
-
             for (int i = 0; i < _str.Length; i++)
             {
                 if (_str[i] == '+' || _str[i] == '-' || _str[i] == '*' || _str[i] == '/' || _str[i] == '^')
-                {
-                    Zn.Add(i);
-                }
+                {Zn.Add(i);}
             }
 
             for (int i = 0; i < Zn.Count - 1; i++)
             {
-                if ((Zn[i] + 1) == Zn[i + 1])
-                {
-                    t++;
-                }
+                if ((Zn[i] + 1) == Zn[i + 1]) {t++;}
             }
-
-            if (t > 0)
-            {
-                Errors(_str, _str, -200000000.138);
-                return -200000000.138;
-            }
+            if (t > 0) {Errors(_str, _str, -200000000.138);return -200000000.138;}
             else
             {
-                double a = 0;
-
                 List<double> res_PrCh = new List<double>();
                 List<int> tr_PrCh = new List<int>();
-
                 for (int i = 0; i < _str.Length; i++)
                 {
-                    if (_str[i] == '+' || _str[i] == '-')
-                    {
-                        tr_PrCh.Add(i);
-                    }
+                    if (_str[i] == '+' || _str[i] == '-') { tr_PrCh.Add(i); }
                 }
 
                 if (tr_PrCh.Count > 0)
@@ -349,76 +199,42 @@ namespace Koryagin_Windows_Forms
                     {
                         tr_PrCh.Clear();
                         _str = "0" + _str;
-
                         for (int i = 0; i < _str.Length; i++)
                         {
-                            if (_str[i] == '+' || _str[i] == '-')
-                            {
-                                tr_PrCh.Add(i);
-                            }
+                            if (_str[i] == '+' || _str[i] == '-') { tr_PrCh.Add(i); }
                         }
                     }
                 }
-
                 string[] strs = _str.Split(new char[] { '+', '-' });
                 foreach (string s in strs)
                 {
                     if (s.Contains('*') || s.Contains('/'))
                     {
-                        if (B1(s) < -200000000)
-                        {
-                            Errors(_str, s, B1(s));
-                            return -200000000.133;
-                        }
-                        else
-                        {
-                            res_PrCh.Add(B1(s));
-                        }
+                        if (B1(s) < -200000000) { Errors(_str, s, B1(s)); return -200000000.133; }
+                        else { res_PrCh.Add(B1(s)); }
                     }
                     else
                     {
                         if (s.Contains('^'))
                         {
-                            if (B2(s) < -200000000)
-                            {
-                                Errors(_str, s, B2(s));
-                                return -200000000.134;
-                            }
-                            else
-                            {
-                                res_PrCh.Add(B2(s));
-                            }
+                            if (B2(s) < -200000000) { Errors(_str, s, B2(s)); return -200000000.134; }
+                            else { res_PrCh.Add(B2(s)); }
                         }
                         else
                         {
                             if (s.Contains("sin") || s.Contains("cos") || s.Contains("abs"))
                             {
-                                if (B3(s) < -200000000)
-                                {
-                                    Errors(_str, s, B3(s));
-                                    return -200000000.135;
-                                }
-                                else
-                                {
-                                    res_PrCh.Add(B3(s));
-                                }
+                                if (B3(s) < -200000000) { Errors(_str, s, B3(s)); return -200000000.135; }
+                                else { res_PrCh.Add(B3(s)); }
                             }
                             else
                             {
-                                if (B4(s) < -200000000)
-                                {
-                                    Errors(_str, s, B4(s));
-                                    return -200000000.136;
-                                }
-                                else
-                                {
-                                    res_PrCh.Add(B4(s));
-                                }
+                                if (B4(s) < -200000000) { Errors(_str, s, B4(s)); return -200000000.136; }
+                                else { res_PrCh.Add(B4(s)); }
                             }
                         }
                     }
                 }
-
                 a = res_PrCh[0];
 
                 for (int i = 0; i < tr_PrCh.Count; i++)
